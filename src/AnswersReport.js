@@ -59,14 +59,8 @@ const useStyles = makeStyles({
 });
 const AnswersReport = () => {
   const classes = useStyles();
-  const {
-    loading,
-    questions,
-    user_answers,
-    clearAnswers,
-    correctAnswers,
-    correct,
-  } = useGlobalContext();
+  const { loading, questions, user_answers, clearAnswers, correct } =
+    useGlobalContext();
 
   if (loading) {
     return <Loading />;

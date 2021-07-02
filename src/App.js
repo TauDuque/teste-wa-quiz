@@ -1,15 +1,18 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { useGlobalContext } from "./context";
 import Quiz from "./Quiz";
+import Home from "./Home";
 import AnswersReport from "./AnswersReport";
 
 function App() {
   return (
-    <div>
+    <div style={{ height: "90vh" }}>
       <Router>
         <Switch>
           <Route exact path="/">
+            <Home />
+          </Route>
+          <Route exact path="/quiz">
             <Quiz />
           </Route>
           <Route exact path="/answersreport">

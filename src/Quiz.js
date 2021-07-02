@@ -67,7 +67,6 @@ const Quiz = () => {
 
   const handleAnswer = (e) => {
     checkAnswer(e.target.value);
-    console.log(correct_answer);
     correctAnswers(e.target.value === correct_answer);
   };
 

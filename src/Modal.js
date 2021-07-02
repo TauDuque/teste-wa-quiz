@@ -71,7 +71,7 @@ const Modal = () => {
             </Button>
           </Box>
           <Button className={classes.MuiButton} onClick={closeModal}>
-            <Link className={classes.MuiButtonLabel} to="/answersreport">
+            <Link className={classes.MuiButtonLabel} push to="/answersreport">
               Answers Report
             </Link>
           </Button>

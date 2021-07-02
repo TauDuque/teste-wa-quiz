@@ -9,7 +9,7 @@ const reducer = (state, action) => {
     return { ...state, quiz_questions: action.payload };
   }
   if (action.type === CLEAR_ANSWER) {
-    return { ...state, user_answers: [] };
+    return { ...state, user_answers: [], correct: 0 };
   }
   throw new Error(`No Matching "${action.type}" - action type`);
 };
