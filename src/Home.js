@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useGlobalContext } from "./context";
+import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Box,
@@ -16,33 +17,142 @@ import {
 
 const useStyles = makeStyles((theme) => ({
   main: {
-    alignItems: "center",
     width: "60vw",
-    height: "450px",
+    minHeight: "450px",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    maxWidth: "var(--max-width)",
+    margin: "4rem auto",
+    textAlign: "center",
+    justifyContent: "center",
+    background: "var(--clr-yellow)",
+    borderRadius: "var(--radius)",
+    padding: "1rem",
+  },
+  container: {
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-    maxWidth: "var(--max-width)",
-    margin: "4rem auto",
-    background: "var(--clr-yellow)",
+    alignItems: "center",
+  },
+  formSetup: {
+    display: "flex",
+    alignItems: "center",
+    flexDirection: "column",
+  },
+  formInput: {
+    border: "none",
+    background: "var(--clr-grey-2)",
+    fontSize: "1rem",
+    padding: "0.25rem 0.5rem",
+    width: "100%",
     borderRadius: "var(--radius)",
-    padding: "3rem",
+  },
+  error: {
+    color: "var(--clr-red-dark)",
+    textTransform: "capitalize",
+  },
+  MuiInputFormControl: {
+    width: theme.spacing(32),
+  },
+  MuiFormLabel: {
+    color: "#312d28",
+    textTransform: "capitalize",
+    fontWeight: 500,
+  },
+  MuiButton: {
+    borderRadius: "var(--radius)",
+    borderColor: "transparent",
+    display: "block",
+    minWidth: "170px",
+    marginLeft: "auto",
+    marginTop: "2rem",
+    textTransform: "capitalize",
+    fontWeight: 700,
+    letterSpacing: "var(--spacing)",
+    fontSize: "1rem",
+    background: "var(--clr-primary-pink)",
+    backgroundImage:
+      "linear-gradient(to right, transparent, rgba(0, 0, 0, 0.3))",
+    color: "var(--clr-black)",
+    transition: "var(--transition)",
+    cursor: "pointer",
+    "&:hover": {
+      background: "var(--clr-black)",
+      backgroundImage:
+        "linear-gradient(to right, transparent, rgba(0, 0, 0, 0.3))",
+      color: "#dc2373",
+    },
+  },
+  MuiButtonLabel: {
+    color: "var(--clr-black)",
+    textDecoration: "none",
   },
 }));
 
 const Home = () => {
   const classes = useStyles();
+  const { handleChange, error, clearAnswers } = useGlobalContext();
+  const history = useHistory();
+  useEffect(() => {
+    clearAnswers();
+  }, []);
+
+  const handleClick = () => {
+    setTimeout(() => {
+      history.push("/quiz");
+    }, 2300);
+  };
+
   return (
-    <Paper>
-      <Container className={classes.main}>
-        <Box>
-          <Typography variant="h1">Quiz Game</Typography>
-        </Box>
-        <Box>
-          <Typography variant="h2">Are you in mood?</Typography>
-        </Box>
-      </Container>
-    </Paper>
+    <main style={{ height: "90vh" }}>
+      <Paper className={classes.main}>
+        <Container className={classes.container}>
+          <form className={classes.formSetup}>
+            <Box>
+              <Typography variant="h1">Quiz Game</Typography>
+            </Box>
+            <Box>
+              <Typography variant="h2">Are you in mood?</Typography>
+            </Box>
+            <Box>
+              <FormControl className={classes.MuiInputFormControl}>
+                <InputLabel className={classes.MuiFormLabel}>
+                  questions
+                </InputLabel>
+                <Select
+                  onChange={handleChange}
+                  name="amount"
+                  labelId="demo-controlled-open-select-label"
+                  id="demo-controlled-open-select"
+                >
+                  <MenuItem value="4">4</MenuItem>
+                  <MenuItem value="6">6</MenuItem>
+                  <MenuItem value="8">8</MenuItem>
+                  <MenuItem value="10">10</MenuItem>
+                </Select>
+                <FormHelperText>Choose the Number of Questions </FormHelperText>
+              </FormControl>
+            </Box>
+            {error && (
+              <Typography variant="body1" className={classes.error}>
+                can't generate questions, please try different options
+              </Typography>
+            )}
+            <Box marginTop={1}>
+              <Button
+                type="button"
+                className={classes.MuiButton}
+                onClick={() => handleClick()}
+              >
+                PLAY
+              </Button>
+            </Box>
+          </form>
+        </Container>
+      </Paper>
+    </main>
   );
 };
 

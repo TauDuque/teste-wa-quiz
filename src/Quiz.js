@@ -2,7 +2,7 @@ import React from "react";
 import { useGlobalContext } from "./context";
 import { Box, Button, Typography, Container } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import SetupForm from "./SetupForm";
+import Starter from "./Starter";
 import Loading from "./Loading";
 import Modal from "./Modal";
 
@@ -48,7 +48,7 @@ const Quiz = () => {
   const { waiting, loading, questions, index, checkAnswer, correctAnswers } =
     useGlobalContext();
   if (waiting) {
-    return <SetupForm />;
+    return <Starter />;
   }
   if (loading) {
     return <Loading />;

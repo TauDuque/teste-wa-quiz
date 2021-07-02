@@ -6,7 +6,7 @@ import AnswersReport from "./AnswersReport";
 
 function App() {
   return (
-    <div style={{ height: "90vh" }}>
+    <div>
       <Router>
         <Switch>
           <Route exact path="/">

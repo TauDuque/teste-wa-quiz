@@ -83,16 +83,17 @@ const AppProvider = ({ children }) => {
     const value = e.target.value;
     setQuiz({ ...quiz, [name]: value });
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const { amount } = quiz;
-
     const url = `${API_ENDPOINT}amount=${amount}&type=multiple`;
     fetchQuestions(url);
   };
 
   const clearAnswers = () => {
     dispatch({ type: CLEAR_ANSWER });
+    setWaiting(true);
   };
 
   useEffect(() => {
