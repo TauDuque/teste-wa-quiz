@@ -109,7 +109,7 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    if (localStorage.getItem("user_game", JSON.stringify) === "") {
+    if (localStorage.getItem("user_game", JSON.stringify) === null) {
       clearStorage();
     } else showStorage();
   }, []);
