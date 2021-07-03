@@ -17,6 +17,7 @@ const UserReducer = (state, action) => {
   }
 
   if (action.type === CLEAR_STORAGE) {
+    localStorage.removeItem("user_game");
     return { ...state, user_game: [], correct: 0 };
   }
 

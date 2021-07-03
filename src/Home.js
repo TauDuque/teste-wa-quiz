@@ -105,10 +105,6 @@ const Home = () => {
   const { is_stored, user_game, clearStorage, showStorage } = useUserContext();
 
   useEffect(() => {
-    clearAnswers();
-  }, []);
-
-  useEffect(() => {
     if (localStorage.getItem("user_game", JSON.stringify) === null) {
       clearStorage();
     } else showStorage();

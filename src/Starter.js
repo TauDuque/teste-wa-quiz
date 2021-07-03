@@ -56,10 +56,6 @@ const Starter = () => {
   const classes = useStyles();
   const { handleSubmit, clearAnswers } = useGlobalContext();
 
-  useEffect(() => {
-    clearAnswers();
-  }, []);
-
   return (
     <main>
       <Container className={classes.quiz}>
