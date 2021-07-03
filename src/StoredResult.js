@@ -75,16 +75,10 @@ const StoredResult = () => {
     return <Loading />;
   }
 
-  const clearHandler = () => {
-    clearStorage();
-    history.push("./");
-  };
-
   return (
     <Paper className={classes.main}>
       {user_game.map((item, index) => {
         const { user_answers, quiz_questions, correct } = item;
-        console.log(user_answers, quiz_questions, correct);
         return (
           <Container className={classes.report}>
             <Typography

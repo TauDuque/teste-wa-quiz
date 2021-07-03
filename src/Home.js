@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useGlobalContext } from "./context";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import bagPersonalOff from "./bag-personal-off.png";
 import bagPersonal from "./bag-personal.png";
@@ -103,20 +103,21 @@ const Home = () => {
   const classes = useStyles();
   const { handleChange, error, clearAnswers } = useGlobalContext();
   const { is_stored, user_game, clearStorage, showStorage } = useUserContext();
+  const history = useHistory();
 
-  useEffect(() => {
-    if (localStorage.getItem("user_game", JSON.stringify) === null) {
-      clearStorage();
-    } else showStorage();
-  }, []);
+  const myLocal = JSON.parse(localStorage.getItem("user_game"));
 
+  const reloadUsingLocationHash = () => {
+    window.location.hash = "reload";
+  };
+  window.onload = reloadUsingLocationHash();
   return (
     <main style={{ height: "90vh" }}>
       <Paper className={classes.main}>
         <Container className={classes.container}>
           <form className={classes.formSetup}>
             <Box>
-              <Typography variant="h1">Quiz Game</Typography>
+              <Typography variant="h1">Quiz Game </Typography>
             </Box>
             <Box>
               <Typography variant="h2">Are you in the mood?</Typography>
@@ -157,7 +158,7 @@ const Home = () => {
                 </Link>
               </Grid>
               <Grid item xs>
-                {!is_stored ? (
+                {!myLocal || myLocal === null || myLocal.length <= 0 ? (
                   <Button className={classes.iconButton}>
                     <img src={bagPersonalOff} alt="out of results" />
                   </Button>

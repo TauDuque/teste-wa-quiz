@@ -58,12 +58,9 @@ const useStyles = makeStyles((theme) => ({
 
 const Modal = () => {
   const classes = useStyles();
-  const { isModalOpen, closeModal, correct, questions } = useGlobalContext();
+  const { isModalOpen, closeModal, correct, questions, clearAnswers } =
+    useGlobalContext();
   const { clearStorage } = useUserContext();
-
-  useEffect(() => {
-    clearStorage();
-  }, []);
 
   return (
     <div
@@ -83,7 +80,11 @@ const Modal = () => {
               play again
             </Button>
           </Box>
-          <Button className={classes.MuiButton} onClick={closeModal}>
+          <Button
+            type="button"
+            className={classes.MuiButton}
+            onClick={closeModal}
+          >
             <Link className={classes.MuiButtonLabel} push to="/answersreport">
               Answers Report
             </Link>

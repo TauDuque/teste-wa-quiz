@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Starter = () => {
   const classes = useStyles();
-  const { handleSubmit, clearAnswers } = useGlobalContext();
+  const { handleSubmit } = useGlobalContext();
 
   return (
     <main>
@@ -69,11 +69,7 @@ const Starter = () => {
         </Box>
         <Box display="flex" marginTop={7}>
           <Box marginRight={4}>
-            <Button
-              type="submit"
-              onClick={clearAnswers}
-              className={classes.nextBtn}
-            >
+            <Button type="submit" className={classes.nextBtn}>
               <Link to="/" className={classes.nextBtn}>
                 CANCEL
               </Link>

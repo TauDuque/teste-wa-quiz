@@ -37,12 +37,14 @@ const UserProvider = ({ children }) => {
   };
 
   const clearStorage = () => {
+    localStorage.removeItem("user_game");
     dispatch({ type: RESULT_NOT_STORED });
     dispatch({ type: CLEAR_STORAGE });
   };
-  const showStorage = () => {
+
+  /*const showStorage = () => {
     dispatch({ type: RESULT_STORED });
-  };
+  }; */
 
   useEffect(() => {
     localStorage.setItem("user_game", JSON.stringify(state.user_game));
@@ -50,7 +52,7 @@ const UserProvider = ({ children }) => {
 
   return (
     <UserContext.Provider
-      value={{ ...state, storeGame, clearStorage, showStorage }}
+      value={{ ...state, storeGame, clearStorage /*, showStorage */ }}
     >
       {children}
     </UserContext.Provider>

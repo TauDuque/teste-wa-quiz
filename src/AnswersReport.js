@@ -64,19 +64,26 @@ const AnswersReport = () => {
     loading,
     questions,
     user_answers,
-    clearAnswers,
     correct,
     quiz_questions,
+    clearAnswers,
   } = useGlobalContext();
-  const { storeGame } = useUserContext();
+  const { storeGame, user_game, clearStorage } = useUserContext();
 
   if (loading) {
     return <Loading />;
   }
 
   const storageHandler = () => {
-    clearAnswers();
-    storeGame(user_answers, quiz_questions, correct);
+    if (!user_game || user_game === null || user_game.length <= 0) {
+      console.log("fusca");
+      storeGame(user_answers, quiz_questions, correct);
+    } else {
+      console.log("martelo");
+      clearAnswers();
+      clearStorage();
+      storeGame(user_answers, quiz_questions, correct);
+    }
   };
 
   return (
