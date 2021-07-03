@@ -1,9 +1,12 @@
 import React, { useEffect } from "react";
 import { useGlobalContext } from "./context";
-import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
+import bagPersonalOff from "./bag-personal-off.png";
+import bagPersonal from "./bag-personal.png";
 import {
   Box,
+  Grid,
   Paper,
   FormControl,
   InputLabel,
@@ -14,6 +17,7 @@ import {
   Container,
   Button,
 } from "@material-ui/core";
+import { useUserContext } from "./user_context";
 
 const useStyles = makeStyles((theme) => ({
   main: {
@@ -89,21 +93,26 @@ const useStyles = makeStyles((theme) => ({
     color: "var(--clr-black)",
     textDecoration: "none",
   },
+  iconButton: {
+    marginTop: "2rem",
+    color: "#dc2373",
+  },
 }));
 
 const Home = () => {
   const classes = useStyles();
   const { handleChange, error, clearAnswers } = useGlobalContext();
-  const history = useHistory();
+  const { is_stored, user_game, clearStorage, showStorage } = useUserContext();
+
   useEffect(() => {
     clearAnswers();
   }, []);
 
-  const handleClick = () => {
-    setTimeout(() => {
-      history.push("/quiz");
-    }, 2300);
-  };
+  useEffect(() => {
+    if (localStorage.getItem("user_game", JSON.stringify) === "") {
+      clearStorage();
+    } else showStorage();
+  }, []);
 
   return (
     <main style={{ height: "90vh" }}>
@@ -114,7 +123,7 @@ const Home = () => {
               <Typography variant="h1">Quiz Game</Typography>
             </Box>
             <Box>
-              <Typography variant="h2">Are you in mood?</Typography>
+              <Typography variant="h2">Are you in the mood?</Typography>
             </Box>
             <Box>
               <FormControl className={classes.MuiInputFormControl}>
@@ -140,15 +149,31 @@ const Home = () => {
                 can't generate questions, please try different options
               </Typography>
             )}
-            <Box marginTop={1}>
-              <Button
-                type="button"
-                className={classes.MuiButton}
-                onClick={() => handleClick()}
-              >
-                PLAY
-              </Button>
-            </Box>
+            <Grid container spacing={3}>
+              <Grid item xs>
+                <Paper></Paper>
+              </Grid>
+              <Grid item xs>
+                <Link to="/quiz">
+                  <Button type="button" className={classes.MuiButton}>
+                    PLAY
+                  </Button>
+                </Link>
+              </Grid>
+              <Grid item xs>
+                {!is_stored ? (
+                  <Button className={classes.iconButton}>
+                    <img src={bagPersonalOff} alt="out of results" />
+                  </Button>
+                ) : (
+                  <Link to="/storedresult">
+                    <Button className={classes.iconButton}>
+                      <img src={bagPersonal} alt="check the last results" />
+                    </Button>
+                  </Link>
+                )}
+              </Grid>
+            </Grid>
           </form>
         </Container>
       </Paper>

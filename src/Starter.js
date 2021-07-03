@@ -2,17 +2,8 @@ import React, { useEffect } from "react";
 import { useGlobalContext } from "./context";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
-import {
-  Box,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-  FormHelperText,
-  Typography,
-  Container,
-  Button,
-} from "@material-ui/core";
+import { Box, Typography, Container, Button } from "@material-ui/core";
+import { useUserContext } from "./user_context";
 
 const useStyles = makeStyles((theme) => ({
   quiz: {
@@ -21,11 +12,12 @@ const useStyles = makeStyles((theme) => ({
     height: "450px",
     display: "flex",
     flexDirection: "column",
+    justifyContent: "center",
     maxWidth: "var(--max-width)",
     margin: "4rem auto",
     background: "var(--clr-yellow)",
     borderRadius: "var(--radius)",
-    padding: "3rem",
+    padding: "2rem",
   },
 
   nextBtn: {
@@ -63,17 +55,24 @@ const useStyles = makeStyles((theme) => ({
 const Starter = () => {
   const classes = useStyles();
   const { handleSubmit, clearAnswers } = useGlobalContext();
+
   useEffect(() => {
     clearAnswers();
   }, []);
+
   return (
     <main>
       <Container className={classes.quiz}>
-        <Typography style={{ textAlign: "center" }} variant="h1">
-          Quiz Stater
-        </Typography>
-        <Box display="flex" marginTop={6}>
-          <Box marginRight={3}>
+        <Box marginTop={4} paddinTop={3}>
+          <Typography marginTop style={{ textAlign: "center" }} variant="h1">
+            Quiz Starter
+          </Typography>
+          <Typography marginTop style={{ textAlign: "center" }} variant="body1">
+            Press "Cancel" to go back or "Start" to go ahead
+          </Typography>
+        </Box>
+        <Box display="flex" marginTop={7}>
+          <Box marginRight={4}>
             <Button
               type="submit"
               onClick={clearAnswers}

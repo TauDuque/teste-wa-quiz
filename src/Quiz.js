@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useGlobalContext } from "./context";
-import { Box, Button, Typography, Container } from "@material-ui/core";
+import { Box, Typography, Container } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Starter from "./Starter";
 import Loading from "./Loading";
 import Modal from "./Modal";
+import { useUserContext } from "./user_context";
 
 const useStyles = makeStyles({
   quiz: {
@@ -47,6 +48,8 @@ const Quiz = () => {
   const classes = useStyles();
   const { waiting, loading, questions, index, checkAnswer, correctAnswers } =
     useGlobalContext();
+  const { clearStorage } = useUserContext();
+
   if (waiting) {
     return <Starter />;
   }

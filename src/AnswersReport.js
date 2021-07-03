@@ -11,6 +11,7 @@ import {
   Divider,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import { useUserContext } from "./user_context";
 
 const useStyles = makeStyles({
   main: {
@@ -59,12 +60,24 @@ const useStyles = makeStyles({
 });
 const AnswersReport = () => {
   const classes = useStyles();
-  const { loading, questions, user_answers, clearAnswers, correct } =
-    useGlobalContext();
+  const {
+    loading,
+    questions,
+    user_answers,
+    clearAnswers,
+    correct,
+    quiz_questions,
+  } = useGlobalContext();
+  const { storeGame } = useUserContext();
 
   if (loading) {
     return <Loading />;
   }
+
+  const storageHandler = () => {
+    clearAnswers();
+    storeGame(user_answers, quiz_questions, correct);
+  };
 
   return (
     <Paper className={classes.main}>
@@ -120,7 +133,7 @@ const AnswersReport = () => {
           );
         })}
         <Link to="/">
-          <Button className={classes.nextBtn} onClick={clearAnswers}>
+          <Button className={classes.nextBtn} onClick={() => storageHandler()}>
             go back
           </Button>
         </Link>

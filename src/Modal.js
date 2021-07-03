@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useGlobalContext } from "./context";
-import { Box, Button, Typography, Container } from "@material-ui/core";
+import { Box, Button, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
+import { useUserContext } from "./user_context";
 
 const useStyles = makeStyles((theme) => ({
   modalContent: {
@@ -46,12 +47,24 @@ const useStyles = makeStyles((theme) => ({
   MuiButtonLabel: {
     color: "var(--clr-black)",
     textDecoration: "none",
+    "&:hover": {
+      background: "var(--clr-black)",
+      backgroundImage:
+        "linear-gradient(to right, transparent, rgba(0, 0, 0, 0.3))",
+      color: "#dc2373",
+    },
   },
 }));
 
 const Modal = () => {
   const classes = useStyles();
   const { isModalOpen, closeModal, correct, questions } = useGlobalContext();
+  const { clearStorage } = useUserContext();
+
+  useEffect(() => {
+    clearStorage();
+  }, []);
+
   return (
     <div
       className={`${
