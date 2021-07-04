@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import AnswersReport from "./pages/AnswersReport";
 import StoredResult from "./pages/StoredResult";
 import Logo from "./components/Logo";
+import ErrorPage from "./pages/ErrorPage";
 
 function App() {
   return (
@@ -21,6 +22,9 @@ function App() {
           </Route>
           <Route exact path="/storedresult">
             <StoredResult />
+          </Route>
+          <Route exact path="/*">
+            <ErrorPage />
           </Route>
         </Switch>
       </Router>
