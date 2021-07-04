@@ -1,9 +1,8 @@
-import React, { useEffect } from "react";
-import { useGlobalContext } from "./context";
+import React from "react";
+import { useGlobalContext } from "../context/context";
 import { Box, Button, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
-import { useUserContext } from "./user_context";
 
 const useStyles = makeStyles((theme) => ({
   modalContent: {
@@ -58,9 +57,13 @@ const useStyles = makeStyles((theme) => ({
 
 const Modal = () => {
   const classes = useStyles();
-  const { isModalOpen, closeModal, correct, questions, clearAnswers } =
+  const { isModalOpen, closeModal, correct, questions, showLogo } =
     useGlobalContext();
-  const { clearStorage } = useUserContext();
+
+  const buttonHandler = () => {
+    closeModal();
+    showLogo();
+  };
 
   return (
     <div
@@ -76,7 +79,10 @@ const Modal = () => {
         </Typography>
         <Box display="flex">
           <Box marginRight={3}>
-            <Button className={classes.MuiButton} onClick={closeModal}>
+            <Button
+              className={classes.MuiButton}
+              onClick={() => buttonHandler()}
+            >
               play again
             </Button>
           </Box>

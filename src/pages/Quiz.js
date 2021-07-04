@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
-import { useGlobalContext } from "./context";
+import { useGlobalContext } from "../context/context";
 import { Box, Typography, Container } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import Starter from "./Starter";
-import Loading from "./Loading";
-import Modal from "./Modal";
-import { useUserContext } from "./user_context";
+import Starter from "../components/Starter";
+import Loading from "../components/Loading";
+import Modal from "../components/Modal";
+import { useUserContext } from "../context/user_context";
 
 const useStyles = makeStyles({
   quiz: {

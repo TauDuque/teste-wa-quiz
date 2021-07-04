@@ -1,7 +1,13 @@
 import axios from "axios";
 import React, { useState, useContext, useReducer, useEffect } from "react";
-import reducer from "./reducer";
-import { ADD_ANSWER, STORE_QUIZ, CLEAR_ANSWER } from "./actions";
+import reducer from "../reducer/reducer";
+import {
+  ADD_ANSWER,
+  STORE_QUIZ,
+  CLEAR_ANSWER,
+  SHOW_LOGO,
+  HIDE_LOGO,
+} from "../actions";
 
 const API_ENDPOINT = "https://opentdb.com/api.php?";
 
@@ -12,6 +18,7 @@ const AppContext = React.createContext();
 const initialState = {
   user_answers: [],
   quiz_questions: [],
+  show_logo: true,
 };
 
 const AppProvider = ({ children }) => {
@@ -96,6 +103,14 @@ const AppProvider = ({ children }) => {
     setWaiting(true);
   };
 
+  const hideLogo = () => {
+    dispatch({ type: HIDE_LOGO });
+  };
+
+  const showLogo = () => {
+    dispatch({ type: SHOW_LOGO });
+  };
+
   useEffect(() => {
     setCorrect(0);
   }, [loading]);
@@ -119,6 +134,8 @@ const AppProvider = ({ children }) => {
         clearAnswers,
         correctAnswers,
         correct,
+        showLogo,
+        hideLogo,
       }}
     >
       {children}

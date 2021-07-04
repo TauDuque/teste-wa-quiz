@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useGlobalContext } from "./context";
+import { useGlobalContext } from "../context/context";
 import { Link, useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
-import bagPersonalOff from "./bag-personal-off.png";
-import bagPersonal from "./bag-personal.png";
+import bagPersonalOff from "../assets/bag-personal-off.png";
+import bagPersonal from "../assets/bag-personal.png";
 import {
   Box,
   Grid,
@@ -17,7 +17,7 @@ import {
   Container,
   Button,
 } from "@material-ui/core";
-import { useUserContext } from "./user_context";
+import { useUserContext } from "../context/user_context";
 
 const useStyles = makeStyles((theme) => ({
   main: {
@@ -101,9 +101,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Home = () => {
   const classes = useStyles();
-  const { handleChange, error, clearAnswers } = useGlobalContext();
-  const { is_stored, user_game, clearStorage, showStorage } = useUserContext();
-  const history = useHistory();
+  const { handleChange, error } = useGlobalContext();
 
   const myLocal = JSON.parse(localStorage.getItem("user_game"));
 

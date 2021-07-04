@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useGlobalContext } from "./context";
+import { useGlobalContext } from "../context/context";
 import { Link } from "react-router-dom";
-import Loading from "./Loading";
+import Loading from "../components/Loading";
 import {
   Box,
   Button,
@@ -11,7 +11,7 @@ import {
   Divider,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { useUserContext } from "./user_context";
+import { useUserContext } from "../context/user_context";
 
 const useStyles = makeStyles({
   main: {
@@ -67,6 +67,7 @@ const AnswersReport = () => {
     correct,
     quiz_questions,
     clearAnswers,
+    showLogo,
   } = useGlobalContext();
   const { storeGame, user_game, clearStorage } = useUserContext();
 
@@ -76,13 +77,13 @@ const AnswersReport = () => {
 
   const storageHandler = () => {
     if (!user_game || user_game === null || user_game.length <= 0) {
-      console.log("fusca");
       storeGame(user_answers, quiz_questions, correct);
+      showLogo();
     } else {
-      console.log("martelo");
       clearAnswers();
       clearStorage();
       storeGame(user_answers, quiz_questions, correct);
+      showLogo();
     }
   };
 

@@ -90,23 +90,7 @@ main {
   justify-content: center;
   align-items: center;
 }
-.quiz {
-  width: 90vw;
-  max-width: var(--max-width);
-  margin: 4rem auto;
-  background: var(--clr-white);
-  border-radius: var(--radius);
-  padding: 3rem;
-}
-.quiz-small {
-  max-width: 500px;
-}
-.container h2 {
-  margin-bottom: 2rem;
-  text-align: center;
-  line-height: 1.5;
-  text-transform: none;
-}
+
 .answer-btn,
 .answerBtn {
   display: block;
@@ -266,4 +250,16 @@ Loading
 }
 .close-btn {
   margin-right: auto;
+}
+
+/*  LOGO */
+
+.logo-container {
+  position: fixed;
+  left: 45px;
+  top: 15px;
+}
+.logo {
+  height: 85px;
+  cursor: pointer;
 }

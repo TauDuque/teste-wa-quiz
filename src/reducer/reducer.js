@@ -1,4 +1,10 @@
-import { ADD_ANSWER, STORE_QUIZ, CLEAR_ANSWER } from "./actions";
+import {
+  ADD_ANSWER,
+  STORE_QUIZ,
+  CLEAR_ANSWER,
+  SHOW_LOGO,
+  HIDE_LOGO,
+} from "../actions";
 
 const reducer = (state, action) => {
   if (action.type === ADD_ANSWER) {
@@ -10,6 +16,12 @@ const reducer = (state, action) => {
   }
   if (action.type === CLEAR_ANSWER) {
     return { ...state, user_answers: [], correct: 0 };
+  }
+  if (action.type === SHOW_LOGO) {
+    return { ...state, show_logo: true };
+  }
+  if (action.type === HIDE_LOGO) {
+    return { ...state, show_logo: false };
   }
   throw new Error(`No Matching "${action.type}" - action type`);
 };

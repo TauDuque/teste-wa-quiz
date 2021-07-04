@@ -1,14 +1,16 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import Quiz from "./Quiz";
-import Home from "./Home";
-import AnswersReport from "./AnswersReport";
-import StoredResult from "./StoredResult";
+import Quiz from "./pages/Quiz";
+import Home from "./pages/Home";
+import AnswersReport from "./pages/AnswersReport";
+import StoredResult from "./pages/StoredResult";
+import Logo from "./components/Logo";
 
 function App() {
   return (
     <div>
       <Router>
+        <Logo />
         <Switch>
           <Route exact path="/" component={() => <Home />} />
           <Route exact path="/quiz">

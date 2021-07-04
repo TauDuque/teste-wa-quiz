@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useGlobalContext } from "./context";
+import { useGlobalContext } from "../context/context";
 import { Link, useHistory } from "react-router-dom";
-import Loading from "./Loading";
+import Loading from "../components/Loading";
 import {
   Box,
   Button,
@@ -12,7 +12,7 @@ import {
   Grid,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { useUserContext } from "./user_context";
+import { useUserContext } from "../context/user_context";
 
 const useStyles = makeStyles({
   main: {

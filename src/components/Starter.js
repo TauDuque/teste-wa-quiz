@@ -1,9 +1,8 @@
-import React, { useEffect } from "react";
-import { useGlobalContext } from "./context";
+import React from "react";
+import { useGlobalContext } from "../context/context";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import { Box, Typography, Container, Button } from "@material-ui/core";
-import { useUserContext } from "./user_context";
 
 const useStyles = makeStyles((theme) => ({
   quiz: {
@@ -45,7 +44,6 @@ const useStyles = makeStyles((theme) => ({
       color: "#dc2373",
     },
   },
-
   MuiButtonLabel: {
     color: "var(--clr-black)",
     textDecoration: "none",
@@ -54,7 +52,12 @@ const useStyles = makeStyles((theme) => ({
 
 const Starter = () => {
   const classes = useStyles();
-  const { handleSubmit } = useGlobalContext();
+  const { handleSubmit, hideLogo } = useGlobalContext();
+
+  const buttonHandler = (e) => {
+    handleSubmit(e);
+    hideLogo();
+  };
 
   return (
     <main>
@@ -76,8 +79,8 @@ const Starter = () => {
             </Button>
           </Box>
           <Button
-            type="submit"
-            onClick={handleSubmit}
+            type="button"
+            onClick={(e) => buttonHandler(e)}
             className={classes.nextBtn}
           >
             START

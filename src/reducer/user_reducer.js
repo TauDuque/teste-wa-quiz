@@ -1,9 +1,4 @@
-import {
-  STORE_GAME,
-  CLEAR_STORAGE,
-  RESULT_STORED,
-  RESULT_NOT_STORED,
-} from "./actions";
+import { STORE_GAME, CLEAR_STORAGE } from "../actions";
 
 const UserReducer = (state, action) => {
   if (action.type === STORE_GAME) {
@@ -19,14 +14,6 @@ const UserReducer = (state, action) => {
   if (action.type === CLEAR_STORAGE) {
     localStorage.removeItem("user_game");
     return { ...state, user_game: [], correct: 0 };
-  }
-
-  if (action.type === RESULT_STORED) {
-    return { ...state, is_stored: true };
-  }
-
-  if (action.type === RESULT_NOT_STORED) {
-    return { ...state, is_stored: false };
   }
 
   throw new Error(`No Matching "${action.type}" - action type`);
